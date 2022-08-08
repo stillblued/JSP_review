@@ -35,7 +35,21 @@
     </table>
 
     <script>
+
         //버튼을 클릭하면 선택한 행의 학생이름 출력
+        let btns = document.getElementsByTagName("button");
+        
+        for(btn of btns){
+            
+            btn.addEventListener("click", function(){
+                let name = this.closest('tr').firstElementChild.innerHTML;
+                alert(name);
+
+            })
+           
+        }
+
+
 
     </script>
 

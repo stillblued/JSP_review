@@ -13,10 +13,27 @@
     <p class="word">good</p>
     <p class="word">very</p>
     <script>
-        //추가버튼 클릭하면 input태그의 값을 p태그 만들어서 추가
         
-        //p태그를 클릭하면 배경색 변경
+        //추가버튼 클릭하면 input태그의 값을 p태그 만들어서 추가
+        btnAdd.addEventListener("click", function(){
+            let val = document.getElementById("txtWord").value;
+            let p = document.createElement("p");
+            p.innerHTML = val;
+            p.setAttribute("class", "word");
+            document.body.append(p);
+            document.getElementById("txtWord").value = "";
+        })
 
+        //p클릭하면 배경색 변경
+        let pColor = document.getElementsByClassName("word");
+        for(color of pColor){
+            color.addEventListener("click", function(){
+                var colorCode = "#"+Math.round(Math.random() * 0xffffff).toString(16);
+                document.body.style.background=colorCode;
+
+            })
+        }
+    
     </script>
 </body>
 </html>
