@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #img1{
+            left: 100px;
+            width: 100px;
+            top:100px;
+            position: absolute;
+        }
+
+        #img2{
+            left: 100px;
+            width: 100px;
+            top:300px;
+            position: absolute;
+        }
+        
+    </style>
+
+</head>
+<body>
+    <button id ="btnStart">시작</button>
+
+    <img src="../images/1.jpg" id="img1">
+    <img src="../images/3.jpg" id="img2">
+
+<script>
+    img1.style.left = "100px";
+    img1.style.top = "100px";
+    img2.style.left = "100px";
+    img2.style.top = "300px";
+    
+    function move1(){
+        img1.style.left = parseInt(img1.style.left) +(Math.random()*20) + "px";
+        if (parseInt(img1.style.left) > 800){
+            window.clearInterval(timer1);
+        }
+    }
+    function move2(){
+        img2.style.left = parseInt(img2.style.left) +(Math.random()*20) + "px";
+        if (parseInt(img2.style.left) > 800){
+            window.clearInterval(timer2);
+        }
+    }
+    var timer1;
+    var timer2;
+    btnStart.addEventListener("click", function(){
+        timer1 = window.setInterval(move1, 200);
+        timer2 = window.setInterval(move2, 200);
+
+    })
+    
+   
+
+
+</script>
+
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+img{
+    left: 100px;
+    width: 100px;
+    top:100px;
+    position: relative;
+}
+
+</style>
+
+</head>
+<body>
+    
+<img id = "img" src="../images/1.jpg">
+
+<script>
+    img.style.left = "100px";
+    img.style.top = "100px";
+
+    window.addEventListener("keydown", function(){
+        
+        let a = window.event.keyCode;
+        if (a == 37){
+            img.style.left = parseInt(img.style.left) -5 + "px"
+        }
+        if (a == 38){
+            img.style.top = parseInt(img.style.top) -5 + "px"
+        }
+        if (a == 39){
+            img.style.left = parseInt(img.style.left) +5 + "px"
+        }
+        if (a == 40){
+            img.style.top = parseInt(img.style.top) +5 + "px"
+        }
+
+        })
+
+</script>
+
+
+</body>
+</html>

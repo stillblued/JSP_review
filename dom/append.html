@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id = "fruit"><button id = "btn">추가</button>
+    <select id = "list"></select>
+    
+    <script>
+        btn.addEventListener("click", function(){
+            
+            let op = document.createElement("option")
+            op.innerHTML=fruit.value;
+            list.append(op);
+            fruit.value="";
+
+        })
+
+        fruit.addEventListener("keypress", function(){
+            if( window.event.keyCode == 13){
+                btn.click();
+            }
+
+        })
+
+        window.addEventListener("keydown", function(){
+            console.log(window.event.keyCode)
+           
+
+        })
+
+    </script>
+
+</body>
+</html>
