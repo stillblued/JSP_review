@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = new Object();
+        obj.name ='홍길동';
+        obj.age=20;
+        console.dir(obj);
+
+        //{}
+        var obj2 = {};
+        obj2.name ="이순신";
+        obj2.age = 20;
+        console.dir(obj2);
+
+        var obj3 = {name:"나기자", age:30};
+        console.dir(obj3);
+
+        var arr1 = [
+            obj, obj2
+        ];
+        arr1.push(obj3);
+        console.dir(arr1);
+
+        var arr2 = [
+        {name:"나기자", age:30, hobby:["ski", "read"]},
+        {name:"이기자", age:20, hobby:["프로그램"]}
+        ];
+        console.dir(arr2[0].hobby[0]);
+
+        var arr3 = {
+            paging : {page : 1, total:20},
+            datas : [ {no:1, title:'java'},
+                        {no:2, title:'jsp'}
+                    ]
+        }
+
+        console.log(arr3.datas[0].title);
+        
+        for(d of arr3.datas){
+            console.log(d.title);
+        }
+
+
+        
+
+    </script>
+
+
+
+</body>
+</html>
