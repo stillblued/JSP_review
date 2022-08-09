@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script>
+        window.addEventListener("load", function(){
+            btn.addEventListener("click", function(){
+                result.innerHTML +=`<div class="addDiv">${txt.value}</div>`;
+                txt.value = "";
+
+            })
+
+        
+        document.getElementsByClassName("addDiv")
+
+
+
+
+
+        })
+    </script>
+
+</head>
+<body>
+    
+
+    <input id  = "txt"><button id="btn">추가</button><br>
+    <div id = "result">
+            <div class="addDiv">dddd</div>
+    </div>
+
+
+
+</body>
+</html>
