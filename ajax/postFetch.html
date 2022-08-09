@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<script>
+
+window.addEventListener("load", function(){
+    btn.addEventListener("click", loadDoc);
+})
+
+
+
+function loadDoc() {
+
+    const url = "https://jsonplaceholder.typicode.com/posts"; //2. 서버 URL
+    fetch(url)
+    .then(res => res.json())
+    .then(obj => {
+        for(ob of obj){
+            list.innerHTML +=` <tr>
+                                <td> ${ob.id}       </td>
+                                <td> ${ob.title}    </td>
+                                <td> ${ob.userId}   </td>
+                            </tr>`;
+        }
+    })
+
+    
+    
+};
+
+
+</script>
+
+
+
+</head>
+<body>
+    
+    <button type="button" id ="btn">ajax 요청</button>
+    <h3>post</h3>
+    <table> 
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </thead>
+            <tbody id ="list">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+
+    </table>
+
+
+</body>
+</html>
