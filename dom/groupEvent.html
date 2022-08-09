@@ -9,15 +9,23 @@
 
     <script>
         window.addEventListener("load", function(){
+            //추가버튼핸들러
             btn.addEventListener("click", function(){
                 result.innerHTML +=`<div class="addDiv">${txt.value}</div>`;
                 txt.value = "";
-
             })
 
-        
-        document.getElementsByClassName("addDiv")
-
+            result.addEventListener("click", function(){ 
+                //그룹이벤트->이벤트타겟
+                if(event.target.tagName =='P'){ // 대문자
+                    event.target.style.color = "blue";
+                }
+                if(event.target.classList.contains("addDiv")){
+                    event.target.style.color = "red";
+                }
+            })
+            
+             
 
 
 
@@ -32,7 +40,7 @@
     <input id  = "txt"><button id="btn">추가</button><br>
     <div id = "result">
             <div class="addDiv">dddd</div>
-    </div>
+            <div class="bbb">bbbb</div>
 
 
 
