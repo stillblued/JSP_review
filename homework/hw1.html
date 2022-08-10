@@ -25,14 +25,23 @@
         })
 
         //p클릭하면 배경색 변경
-        let pColor = document.getElementsByClassName("word");
-        for(color of pColor){
-            color.addEventListener("click", function(){
+
+        window.addEventListener("click", function(){
+
+            var p = event.target;
+            if(p.tagName =="P"){
+            
                 var colorCode = "#"+Math.round(Math.random() * 0xffffff).toString(16);
                 document.body.style.background=colorCode;
-                this.style.background=colorCode;
-            })
-        }
+                p.style.background=colorCode;
+
+    
+            }
+        })
+
+        
+
+
     
     </script>
 </body>
