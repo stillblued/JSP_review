@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input id = "daily">
+    <button type="button" id="btn">박스오피스 조회</button>
+    <div id="result">
+        <div><span>코드</span>&nbsp;&nbsp;&nbsp;<span>순위</span>&nbsp;&nbsp;&nbsp;<span>제목</span></div>
+    </div>
+
+    <hr>
+    
+    <div id="info">
+        <div><span>장르</span>&nbsp;&nbsp;&nbsp;<span>감독</span>&nbsp;&nbsp;&nbsp;<span>주연</span></div>
+    </div>
+
+    <script>
+        btn.addEventListener("click", function(){
+            let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt="+daily.value;
+            daily.value="";
+            fetch(url)
+            .then(res=>res.json())
+            .then(obj=>{
+
+                let box = obj.boxOfficeResult.dailyBoxOfficeList;
+                for(o of box){
+                    result.innerHTML += `<div><span class ="code">${o.movieCd}</span>&nbsp;&nbsp;&nbsp;<span>${o.rank}</span>&nbsp;&nbsp;&nbsp;<span>${o.movieNm}</span></div>`;
+                }
+
+            })
+
+
+        })
+
+        
+
+        result.addEventListener("click", function(){ 
+            let code = event.target;
+                if(code.getAttribute("class") == "code"){
+                    let url = "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd="+code.innerHTML;
+                    fetch(url)
+                    .then(res=>res.json())
+                    .then(obj=>{
+
+                    let box = obj.movieInfoResult.movieInfo;
+                    info.innerHTML += `<div><span>${box.genres[0].genreNm}</span>&nbsp;&nbsp;&nbsp;<span>${box.directors[0].peopleNm}</span>&nbsp;&nbsp;&nbsp;<span>${box.actors[0].peopleNm}</span></div>`;
+                    })
+                }
+            }, true)
+
+
+       
+
+
+    </script>
+
+</body>
+</html>

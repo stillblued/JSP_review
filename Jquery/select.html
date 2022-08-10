@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요소선택</title>
+
+    <style>
+   .book{
+        color:blue;
+        font-size: 12px;   
+    }
+    .hi {
+        background-color: cornflowerblue;
+
+    }
+
+    </style>
+
+
+
+</head>
+<body>
+
+<div id = "first">자바</div>
+<div class = "subj">스프링</div>
+<div>JSP</div>
+<div>자바스크립트</div>
+<div><input name = "writer" id ="writer"></div></div>
+<img src="../images/1.jpg" width="300" id="pic">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+    // let divs = document.getElementsByTagName("div");
+
+    // for(d of divs){
+    //     d.classList.add("book");
+    // }
+    
+    $("#first").addClass("book");
+    $("[name='writer']").val("홍길동");
+    $("#pic").attr("src", "../images/3.jpg")
+
+
+</script>
+
+
+</body>
+</html>

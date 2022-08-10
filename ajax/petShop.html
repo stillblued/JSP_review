@@ -23,78 +23,103 @@
       </div>
 
       <div id="petsRow" class="row">
-      
-        <!-- PETS LOAD HERE -->
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
-          <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="./images/scottish-terrier.jpeg" data-holder-rendered="true">
-            <br/><br/>
-            <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
-            <strong>Age</strong>: <span class="pet-age">3</span><br/>
-            <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
-            <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
-          <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="./images/french-bulldog.jpeg" data-holder-rendered="true">
-            <br/><br/>
-            <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
-            <strong>Age</strong>: <span class="pet-age">3</span><br/>
-            <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
-            <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
-          </div>
-        </div>
-      </div>    
-      
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
-          <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="./images/boxer.jpeg" data-holder-rendered="true">
-            <br/><br/>
-            <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
-            <strong>Age</strong>: <span class="pet-age">3</span><br/>
-            <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
-            <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
-          </div>
-        </div>
-      </div>        
-     </div>      
-   </div>
 
-
-    <div id="petTemplate" style="display: none;">
-      <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
-          <div class="panel-heading">
-            <h3 class="panel-title">Scrappy</h3>
-          </div>
-          <div class="panel-body">
-            <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="./images/golden-retriever.jpeg" data-holder-rendered="true">
-            <br/><br/>
-            <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
-            <strong>Age</strong>: <span class="pet-age">3</span><br/>
-            <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
-            <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
+      <div id="petTemplate" style="display: none;">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="panel panel-default panel-pet">
+            <div class="panel-heading">
+              <h3 class="panel-title">Scrappy</h3>
+            </div>
+            <div class="panel-body">
+              <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="../images/golden-retriever.jpeg" data-holder-rendered="true">
+              <br/><br/>
+              <strong>Breed</strong>: <span class="pet-breed">Golden Retriever</span><br/>
+              <strong>Age</strong>: <span class="pet-age">3</span><br/>
+              <strong>Location</strong>: <span class="pet-location">Warren, MI</span><br/><br/>
+              <button class="btn btn-default btn-adopt" type="button" data-id="0">Adopt</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <script>
+    petList();
+    petAdopt();
+
+
+      //전체리스트
+      function petList(){
+        let url="http://localhost/myserver/petSelect";
+        fetch(url)
+        .then(res=>res.json())
+        .then(objs=>{
+          
+          for(obj of objs){
+
+            petsRow.innerHTML += makePet(obj);
+            
+
+          }
+
+        })
+
+      }
+
+      function makePet(obj){
+            petTemplate.querySelector(".panel-title").innerHTML = obj.name;
+            petTemplate.querySelector("img").src = obj.picture;
+            petTemplate.querySelector(".pet-breed").src = obj.breed;
+            petTemplate.querySelector(".pet-age").src = obj.age;
+            petTemplate.querySelector(".pet-location").src = obj.location;
+            petTemplate.querySelector(".btn-adopt").setAttribute("data-id", obj.id);
+
+            if(obj.adopt != null){
+              petTemplate.querySelector(".btn-adopt").innerHTML="Adopted";
+              petTemplate.querySelector(".btn-adopt").setAttribute("disabled", "disabled");
+            } else {
+              petTemplate.querySelector(".btn-adopt").innerHTML="Adopt";
+              petTemplate.querySelector(".btn-adopt").removeAttribute("disabled");
+            }
+
+      return petTemplate.innerHTML;
+
+      }
+
+      function petAdopt(){
+        petsRow.addEventListener("click", function(e){
+          e = window.event || e;
+			
+				if(e.target.classList.contains("btn-adopt")){
+
+        let price = prompt("분양가");
+        let id = e.target.getAttribute("data-id");
+
+				let url ="http://localhost/myserver/adoptInsert";
+				let param = `id=${id}&price=${price}`;
+				fetch(url, {
+					method: "post",
+					headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+					body: param
+				})
+				.then(res=>res.json())
+				.then(obj =>{
+					
+					e.target.setAttribute("disabled", "disabled");
+          e.target.innerHTML="Adopted";
+
+				})
+      }
+      })
+    
+		}
+
+      
+
+
+
+  </script>
 	
   </body>
 </html>
