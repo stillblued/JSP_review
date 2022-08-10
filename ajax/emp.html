@@ -20,21 +20,12 @@
 					<tr>
 						<th class="text-center">사번</th>
 						<th class="text-center">이름</th>
-						<th class="text-center">JOB</th>
 						<th class="text-center"></th>
 					</tr>
 				</thead>
 				
-				<tbody>
-					<tr>
-						<td class="text-center">100</td>
-						<td class="text-center">홍길동</td>
-						<td class="text-center">PROGRAMER</td>
-						<td class="text-center">
-							<button class="btnUpd">조회</button>
-							<button class="btnDel">삭제</button>
-						</td>
-					</tr>	
+				<tbody id = "tbList">
+					
 				</tbody>
 			</table>
 		</div>
@@ -68,7 +59,6 @@
 				</div>
 				<div class="form-group">
 					<input type="button" class="btn btn-primary" value="등록" id="btnInsert" /> 
-					<input type="button" class="btn btn-primary" value="수정" id="btnUpdate" /> 
 					<input type="button" class="btn btn-primary" value="초기화" id="btnInit" />
 				</div>
 			</form>
@@ -78,9 +68,106 @@
 </div>
 
 <script>
+		empList();
+		empInsert();
+		init();
+		empDelete();
+
+		//전체조회
+		
+		function empList(){
+			tbList.innerHTML ="";
+			let url= "http://localhost/myserver/empSelect";
+			fetch(url)
+			.then(res => res.json())
+			.then(objs =>{
+				
+				for(obj of objs){
+					tbList.innerHTML += makeTr(obj);
+
+				}
+
+			})
+
+		}
+
+		//tr뿌려주기
+		function makeTr(obj){
+			return `<tr>
+						<td class="text-center">${obj.employee_id}</td>
+						<td class="text-center">${obj.last_name} ${obj.first_name}</td>
+						<td class="text-center">
+							<button class="btnDel">삭제</button>
+						</td>
+					</tr>`;
+
+		}
 
 
-	
+		//등록버튼
+		function empInsert(){
+			btnInsert.addEventListener("click", function(){
+				let url ="http://localhost/myserver/empInsert";
+				let param = `employee_id=${form1.employee_id.value}&first_name=${form1.first_name.value}&last_name=${form1.last_name.value}&email=${form1.email.value}&hire_date=${form1.hire_date.value}&job_id=${form1.job_id.value}`;
+				fetch(url, {
+					method: "post",
+					headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+					body: param
+				})
+				.then(res=>res.json())
+				.then(obj =>{
+					tbList.innerHTML += makeTr(obj);
+
+				})
+			})
+		}
+
+
+
+		//삭제버튼
+		function empDelete(){
+			tbList.addEventListener("click", function(e){
+				
+				e = window.event || e;
+			
+				if(e.target.classList.contains("btnDel")){
+					
+					if (! confirm('삭제할까요')){
+					return;
+					}
+
+					let id = e.target.closest("tr").firstElementChild.innerHTML;
+					let param = `employee_id=${id}`;
+					let url = "http://localhost/myserver/empDelete";
+					fetch(url, {
+					method: "post",
+					headers: {'Content-Type':'application/x-www-form-urlencoded'}, 
+					body: param
+				})
+					.then(res=>res.json())
+					.then(obj=>{
+						e.target.closest("tr").remove();
+
+					})
+				} 
+
+			})
+
+		}
+
+
+
+
+		//초기화버튼
+		function init(){
+			btnInit.addEventListener("click", function(){
+				form1.reset();
+
+			})
+		}
+
+
+
 </script>
 
 </body>
