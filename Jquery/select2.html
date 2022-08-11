@@ -10,10 +10,10 @@
     
 <table border="1">
     <tr>
-    <td>1</td>
+    <td id="td1">1</td>
     <td>2</td>
     <td>3</td>
-    <td>4</td>
+    <td><button type="button" class="btn">조회</button></td>
     </tr>
 
 
@@ -22,14 +22,14 @@
     <td>5</td>
     <td>6</td>
     <td>7</td>
-    <td>8</td>
+    <td><button type="button" class="btn">조회</button></td>
     </tr> 
         
     <tr>
     <td>9</td>
     <td>10</td>
     <td>11</td>
-    <td>12</td>
+    <td><button type="button" class="btn">조회</button></td>
     </tr>
 
 
@@ -46,6 +46,11 @@
     $("tr:odd").css("backgroundColor", "pink");
     
     // https://www.w3schools.com/jquery/jquery_ref_selectors.asp
+
+    $(".btn").on("click", function(){
+        alert($(this).closest("tr").children().first().html());
+
+    })
 
 </script>
 
