@@ -10,6 +10,8 @@
 <body>
 
 
+    <button type="button" onclick="loadDoc()">ajax 요청</button>
+
     <button id="btn">등록</button>
 
 
@@ -31,8 +33,13 @@
                 method: "post",
                 data: {contents : 'todo test123'},
                 
-            }).done(obj=>{
+            }).done((obj, status, xhr)=>{
+                
                 console.dir(obj);
+                console.log(status);
+                console.dir(xhr);
+
+
             }).fail((xhr, status) =>{
                 console.dir(xhr);
                 console.log(status);
@@ -43,6 +50,32 @@
 
        
     
+
+      
+
+    function loadDoc() {
+    const ajax = new XMLHttpRequest(); //1. XMLHttpRequest 객체 생성
+    const url = "https://jsonplaceholder.typicode.com/todos/1"; //2. 서버 URL
+    ajax.onload = function() { //3. 응답을 처리하는 콜백 함수
+    if(ajax.status >=200 && ajax.status < 300) {
+    successCallback(ajax.response);
+    } else {
+    errorCallback(new Error(ajax.statusText));
+    }
+    };
+    ajax.onerror = errorCallback; //4. 에러 이벤트 발생시 처리할 에러 콜백 함수
+    ajax.open("GET", url); //5. 비동기 연결을 시작
+    ajax.setRequestHeader('Accept','application/json'); //6. 응답 데이터의 mime-type 값을 설정
+    ajax.send(); //7. 전송을 시작
+    }
+    function successCallback(response){
+    console.log('response', response);
+    }
+    function errorCallback(err){
+    console.log('error', err.message)
+    }
+
+
 
 
     </script>
