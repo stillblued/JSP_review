@@ -25,16 +25,23 @@
         $("#btn").on("click", function(){
 
             let url = "http://localhost/myserver/todoInsert";
-            let param ="contents=test";
-            $.post(url, param, function(objs){
-            console.dir(objs[0]);
+    
+            $.ajax(url, {
+                //async:false,
+                method: "post",
+                data: {contents : 'todo test123'},
+                
+            }).done(obj=>{
+                console.dir(obj);
+            }).fail((xhr, status) =>{
+                console.dir(xhr);
+                console.log(status);
+            })
+                console.log("요청");
 
-        })
+         })
 
-
-
-        })
-
+       
         
 
 
