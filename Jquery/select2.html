@@ -10,7 +10,7 @@
     
 <table border="1">
     <tr>
-    <td id="td1">1</td>
+    <td id="td1" data-name="name">1</td>
     <td>2</td>
     <td>3</td>
     <td><button type="button" class="btn">조회</button></td>
@@ -19,14 +19,14 @@
 
 
     <tr>
-    <td>5</td>
+    <td data-name="name">5</td>
     <td>6</td>
     <td>7</td>
     <td><button type="button" class="btn">조회</button></td>
     </tr> 
         
     <tr>
-    <td>9</td>
+    <td data-name="name"> 9</td>
     <td>10</td>
     <td>11</td>
     <td><button type="button" class="btn">조회</button></td>
@@ -48,7 +48,12 @@
     // https://www.w3schools.com/jquery/jquery_ref_selectors.asp
 
     $(".btn").on("click", function(){
-        alert($(this).closest("tr").children().first().html());
+        
+        alert($(this).closest("tr").find("td:first").html());
+        // alert($(this).closest("tr").find("td").first().html());
+        // alert($(this).closest("tr").children().first().html());
+        // alert($(this).closest("tr").children().first().data("name");
+
 
     })
 
