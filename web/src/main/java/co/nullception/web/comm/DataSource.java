@@ -1,4 +1,4 @@
-package co.nullception.web;
+package co.nullception.web.comm;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

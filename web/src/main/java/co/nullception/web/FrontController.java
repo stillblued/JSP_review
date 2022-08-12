@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.nullception.web.comm.Command;
+import co.nullception.web.command.NoticeForm;
+import co.nullception.web.command.NoticeInsert;
+import co.nullception.web.command.NoticeList;
+import co.nullception.web.command.NoticeSelect;
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -22,7 +28,11 @@ public class FrontController extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		// 요청과 수행할 command연결
-		//map.put("/main.do", new MainCommand()); //처음접근하는 곳
+		
+		map.put("/noticeList.do", new NoticeList()); //게시글 목록
+		map.put("/noticeForm.do", new NoticeForm()); //게시글 입력폼 호출
+		map.put("/noticeInsert.do", new NoticeInsert()); //게시글 등록
+		map.put("/noticeSelect.do", new NoticeSelect()); //하나의 게시글 조회
 		
 	}
 
@@ -43,7 +53,7 @@ public class FrontController extends HttpServlet {
 				return;
 			}
 			
-			viewPage = viewPage + ".tiles";
+			viewPage = "WEB-INF/views/" + viewPage + ".jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response);			
 		} else {

@@ -1,4 +1,4 @@
-package co.nullception.web;
+package co.nullception.web.comm;
 
 
 import javax.servlet.http.HttpServletRequest;
