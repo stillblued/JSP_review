@@ -65,7 +65,7 @@
     })
 
    //데이터테이블
-    $('#myTable').DataTable({
+    let empDt = $('#myTable').DataTable({
         ajax:{
             url:'http://localhost/myserver/empSelect',
             dataSrc:''
@@ -79,6 +79,12 @@
 
 
     });
+
+    empDt.on("click", "tbody tr", function(e){
+        console.dir(e);
+        
+        
+    })
 
 
 
@@ -102,7 +108,7 @@
         </div>
         <h3 data-id ="101">jsp</h3>
         <div>
-            <table id="myTable">
+            <table id="myTable" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>번호</th>
