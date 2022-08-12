@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+   //load => ready
+
+    $( function() {
+
+
+        //아코디언
+      $( "#accordion" ).accordion({
+
+        active : 1,
+        animate: 500,
+        collapsible: true,
+        activate: function( ev, ui ) {
+            console.log(ui.newHeader.data("id"));
+            console.log(ui.oldHeader.data("id"));
+        },
+        heightStyle: "content"
+
+      });
+    
+      //데이트피커
+      $( "#datepicker" ).datepicker({ 
+        dateFormat : 'yy-mm-dd',
+        minDate: "-1w",
+        maxDate: "+1M +10D", // new Date()
+        onSelect: function( dt , obj ){
+            console.log(dt);
+            console.dir(obj);
+        }
+
+    });
+
+    //모달
+    let popup = $( "#dialog" ).dialog({
+        autoOpen: false,
+        height: 400,
+        width: 350,
+        modal: true,
+        open:function(ev, ui){
+            console.log("오픈됨");
+        },
+        buttons: {
+            'save':function(){},
+            'close':function(){}
+      }    
+    });
+
+
+    $("#btn").on("click", function(){
+        popup.dialog("open");
+
+    })
+
+   //데이터테이블
+    $('#myTable').DataTable({
+        ajax:{
+            url:'http://localhost/myserver/empSelect',
+            dataSrc:''
+        },
+        columns:[
+            {data : 'employee_id'},
+            {data : 'last_name'},
+            {data : 'salary'},
+            {data : 'job_id'}
+        ]
+
+
+    });
+
+
+
+
+
+    } );
+
+
+   
+    </script>
+
+</head>
+
+<body>
+
+    <div id="accordion">
+        <h3 data-id ="100">java</h3>
+        <div>
+            <p>Date: <input type="text" id="datepicker"><button id = "btn">등록</button></p>
+
+        </div>
+        <h3 data-id ="101">jsp</h3>
+        <div>
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>이름</th>
+                        <th>급여</th>
+                        <th>직무</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+    
+            </table>
+    
+          </div>
+      </div>
+
+
+
+
+
+      <div id="dialog" title="Basic dialog">
+        <p>Name: <input type="text" id="name"></p>
+      </div>
+
+
+
+</body>
+</html>

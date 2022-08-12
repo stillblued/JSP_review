@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div { border: 1px solid blue;
+            padding: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div id="parent">A
+        <div id="my">B
+            <div id = "child">C</div>
+            <a id = "link" href="http://www.naver.com">네이버</a>
+        </div>
+    </div>
+
+    <script>
+
+        parent.addEventListener("click", function(e){alert("a")})
+
+        my.addEventListener("click", function(e){alert("b"); e.stopPropagation();})
+
+        child.addEventListener("click", function(e){alert("c"); e.stopPropagation();})
+
+        link.addEventListener("click", function(e){ 
+            e.stopPropagation();
+
+            if(! confirm("이동할까요?")){
+                e.preventDefault();
+            }
+        })
+            
+
+    </script>
+
+</body>
+</html>
