@@ -12,14 +12,14 @@
 
     <input id="num2" value="3"> 
     
-    <button>=</button>
+    <button id = "sum">=</button>
 
     <input id="result"> 
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
     <script>
-        $("button").bind("click", function(){
+        $("#sum").bind("click", function(){
 
             let num1 = parseInt($("#num1").val());
             let num2 = parseInt($("#num2").val());
