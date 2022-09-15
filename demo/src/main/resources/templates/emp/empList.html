@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.green {
+	background-color: green;
+}
+</style>
+
+</head>
+<body>
+	<article layout:fragment="content">
+
+
+
+
+
+
+
+
+		<h1>전체사원수 [[ ${#lists.size(empList)} ]] 명</h1>
+
+		<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>사번</th>
+					<th>이름</th>
+					<th>급여</th>
+					<th>입사일</th>
+					<th>권한</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- th:class="${st.even}?'green'" -->
+				<tr th:each="emp,st : ${empList}">
+
+					<td th:text="${st.count}">1</td>
+
+					<td><a
+						th:href="@{upEmp1(employeeId=${emp.employeeId}, firstName=${emp.firstName})}"
+						th:text="${emp.employeeId}">100</a></td>
+
+					<td><a
+						th:href="@{upEmp2/{id}/{fname}(id=${emp.employeeId}, fname=${emp.firstName})}"
+						th:text="${emp.employeeId}">100</a></td>
+
+
+
+					<td th:text="${emp.firstName}">홍길동</td>
+
+					<td th:text="${emp.salary}" th:if="${emp.salary}>5000">2000</td>
+
+					<td th:text="${#dates.format(emp.hireDate, 'yyyy-MM-dd')}">2022-11-11</td>
+
+					<td>
+
+						<div th:switch="${emp.departmentId}">
+							<p th:case="10">User is an administrator</p>
+							<p th:case="*">other</p>
+						</div>
+
+					</td>
+
+				</tr>
+
+			</tbody>
+
+		</table>
+
+		<!--  jsp
+
+<%= session.getAttribute("name") %>
+${sessionScope.name}
+
+<%= request.getAttribute("name") %>
+${requestScope.name}
+
+
+${name} request session application 
+
+
+${cookie.popupyn.value}
+
+
+<%= request.getHeader("User-Agent") %>
+${header["User-Agent"]}
+${header["referer"]}
+
+<%= request.getRemoteAddr() %>
+${pageContext.request.remoteAddr}
+
+<%= request.getContextPath() %>
+${pageContext.request.contextPath}
+
+ -->
+
+
+		<script type="text/javascript">
+			localStorage.setItem("lastname", "Smith");
+		</script>
+
+	</article>
+</body>
+</html>
+
